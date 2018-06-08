@@ -20,3 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/films', 'HomeController@index')->name('films');
+
+Route::get('/films/{slug}', 'HomeController@index')->name('films');
+
+
+Route::get('/AllGenres', 'GenreController@AllGenres')->name('AllGenres');

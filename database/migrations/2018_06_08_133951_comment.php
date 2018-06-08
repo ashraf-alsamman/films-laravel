@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Genre extends Migration
+class Comment extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class Genre extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
        
             $table->increments('id');
-            $table->string('title');
-            $table->timestamps();
+            $table->string('name');
+            $table->string('comment');
+            $table->integer('user_id');
+            $table->integer('film_id');
 
+                $table->timestamps();
             });
     }
 
@@ -29,7 +32,6 @@ class Genre extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genre');
-
+        Schema::dropIfExists('comments');
     }
 }
