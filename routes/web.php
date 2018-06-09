@@ -25,3 +25,4 @@ Route::get('/films/{slug}', 'HomeController@index')->name('films');
 
 
 Route::get('/AllGenres', 'GenreController@AllGenres')->name('AllGenres');
+Route::get('/countries', 'CountryController@Country')->name('countries');

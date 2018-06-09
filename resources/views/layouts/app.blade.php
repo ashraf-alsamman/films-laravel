@@ -75,7 +75,9 @@
                 </div>
             </div>
         </nav>
-<div id="AddFilm"></div>
+         
+       <div class="container">    <div id="AddFilm"></div> </div> 
+        
         <main class="py-4">
             @yield('content')
         </main>
