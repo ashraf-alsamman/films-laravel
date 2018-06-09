@@ -24,6 +24,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+    .nvla{
+        background-color:#ff0000;
+    }
+    </style>
 </head>
 <body>
     <div id="app">

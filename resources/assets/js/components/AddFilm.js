@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Slug from 'react-slug';
-
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
- 
 import 'react-datepicker/dist/react-datepicker.css';
-
-
- 
-
 import SelectPicker from "react-select-picker";
-
 import StarRatings from 'react-star-ratings';
-
- 
 
 export default class AddFilm extends Component {
 
     constructor(){
         super()
-        this.state  = { nameV: false , countries: [], getGenres: [] ,
-            startDate: moment(),rating: 3 ,imagesFromUsers: [] }
+        this.state  = { 
+            nameV: false, 
+            descriptionV :false,
+            ticket_priceV :false, 
+            country_idV :false,
+            RealeaseDateV :false,
+            TicketPriceV :false,
+
+            countries: [], 
+            getGenres: [], 
+            startDate: moment(),
+            rating: 3 ,
+            imagesFromUsers: [], 
+            nameData :null ,
+            descriptionData  :null,
+            realease_dateData  :null,
+            ratingData  :null,
+            ticket_priceData :null, 
+            country_idData   :null,
+            film_slugData  :null}
   
           this.handleDateChange = this.handleDateChange.bind(this);
           this.changeRating = this.changeRating.bind(this);
@@ -60,11 +69,7 @@ export default class AddFilm extends Component {
         event.preventDefault()
         
         if (this.state.imagesFromUsers.length<1)
-        {
-          
-            
-            alert('upload at least on photo');return false;
-        }
+        { alert('upload at least on photo');return false;  }
     
         const formData = new FormData()
         var ins = document.getElementById('image').files.length;
@@ -73,39 +78,92 @@ export default class AddFilm extends Component {
        
     }
     
+
+
      
     formData.append("name", this.state.nameData);
-    formData.append("email", this.state.emailData);
-    formData.append("phone", this.state.phoneData);
-    formData.append("category", this.state.categoryData);
-    formData.append("tag", this.state.tagData);
-     
-     
+    formData.append("description", this.state.descriptionData);
+    formData.append("realease_date", this.state.realease_dateData);
+    formData.append("rating", this.state.ratingData);
+    formData.append("ticket_price", this.state.ticket_priceData);
+    formData.append("country_id", this.state.country_idData); 
+    formData.append("film_slug", this.state.film_slugData); 
+
+
+
+    if (nameV,descriptionV,ticket_priceV,country_idV){
         axios.post('/uploadPhoto', formData)  .then(function (response) {
-            console.log(response);
-            if (response.data == "done"){
-                $("#step3").addClass( "d-none" );
-                $("#stepicons").addClass( "d-none" );
-                $("#done").removeClass( "d-none" );
-            }
-    
-          })
-          .catch(function (error) {
-             console.log(error);
-          });
+        console.log(response);
+        if (response.data == "done"){
+        console.log(response);
+        }
+        })
+        .catch(function (error) { console.log(error); });
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+      handleNameChange  (e) 
+      {  
+          if (e.target.value.length<4 )
+          {
+              e.target.classList.add('nvla', 'f1-first-name', 'form-control');
+              this.setState({nameV: false }, () => console.log(this.state)) //
+          }
+      
+          else
+          {
+           e.target.classList.remove('nvla');
+              this.setState({nameV: true }, () => console.log(this.state)) //
+              this.setState({nameData: e.target.value }, () => console.log(this.state)) //
+          }   
+      }
+
+      handleDescriptionChange  (e) 
+      {  
+          if (e.target.value.length<4 )
+          {
+              e.target.classList.add('nvla', 'f1-first-name', 'form-control');
+              this.setState({descriptionV : false }, () => console.log(this.state)) //
+          }
+      
+          else
+          {
+           e.target.classList.remove('nvla');
+              this.setState({descriptionV : true }, () => console.log(this.state)) //
+              this.setState({descriptionData: e.target.value }, () => console.log(this.state)) //
+          }   
+      }
+
+      handleTicketPriceChange  (e) 
+      {  
+          if (e.target.value.length<1 )
+          {
+              e.target.classList.add('nvla', 'f1-first-name', 'form-control');
+              this.setState({TicketPriceV : false }, () => console.log(this.state)) //
+          }
+      
+          else
+          {
+           e.target.classList.remove('nvla');
+              this.setState({TicketPriceV : true }, () => console.log(this.state)) //
+              this.setState({ticket_priceData: e.target.value }, () => console.log(this.state)) //
+          }   
       }
 
 
-
-
-
-
-
-
-
-
-
-
+ 
+    
 
       changeRating( newRating ) {
         this.setState({
@@ -114,16 +172,24 @@ export default class AddFilm extends Component {
       }
 
       handleDateChange(date) {
-        this.setState({
-          startDate: date
-        });
-      }
+
+
+        if (e.target.value.length<1 )
+        {
+            e.target.classList.add('nvla', 'f1-first-name', 'form-control');
+            this.setState({RealeaseDateV : false }, () => console.log(this.state)) //
+        }
+    
+        else
+        {
+         e.target.classList.remove('nvla');
+            this.setState({RealeaseDateV : true }, () => console.log(this.state)) //
+            this.setState({startDate: date }, () => console.log(this.state)) //
+        }  
 
  
-      handleNameChange()
-      {
-
       }
+
 
       componentWillMount  () {
  
@@ -140,9 +206,7 @@ $this.setState({countries:responce.data})}).catch(error=>{  consol.log(error)   
     
     }
 
-      handleChange(event){
-        console.log(event.target.value)
-      }
+
      
       ConvertToSlug(){
         //  
@@ -183,18 +247,18 @@ $this.setState({countries:responce.data})}).catch(error=>{  consol.log(error)   
 <input type="text" name="name" placeholder="Film name..." className="f1-first-name form-control"  onChange={this.handleNameChange.bind(this)} id="name"  />
 </div>  
             
-<div className="form-group">
-<label className="sr-only" htmlFor="description">Description</label>
-<textarea rows="4" cols="50" name="description"  placeholder="  Description.." ></textarea>
+<div className="form-group">handleDescriptionChange
+<label className="sr-only" htmlFor="description"></label>
+<textarea rows="4" cols="50" name="description"  placeholder="  Description.." onChange={this.handleDescriptionChange.bind(this)} id="description" ></textarea>
 </div>           
             
 <div className="form-group">
-<label className="sr-only" htmlFor="description">Description</label>
+<label className="sr-only" htmlFor="description">Datee</label>
  <DatePicker selected={this.state.startDate}onChange={this.handleDateChange} />
 </div>     
  
 <div className="form-group"><label className="sr-only" htmlFor="ticket_price">ticket_price</label>
-<input type="number" name="ticket_price" placeholder="Ticket price..." className="f1-first-name form-control"  onChange={this.handleNameChange.bind(this)} id="name"  />
+<input type="number" name="ticket_price" placeholder="Ticket price..." className="f1-first-name form-control"  id="ticket_price"  onChange={this.handleTicketPriceChange.bind(this)} id="ticket_price" />
 </div> 
  
 <div className="form-group"><label className="sr-only" htmlFor="ticket_price">ticket_price</label>
@@ -249,6 +313,10 @@ starSpacing='20px'
             {$imagePreview}
             
             </div>
+
+            <button className="btn btn-primary" onClick={this.uploadHandler.bind(this)}>Submit !</button>
+
+
              </div>
         );
     }
