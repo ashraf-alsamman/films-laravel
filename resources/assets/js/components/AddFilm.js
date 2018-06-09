@@ -20,13 +20,93 @@ export default class AddFilm extends Component {
 
     constructor(){
         super()
-        this.state  = { nameV: false , countries: [], getGenres: [] ,startDate: moment(),rating: 3}
+        this.state  = { nameV: false , countries: [], getGenres: [] ,
+            startDate: moment(),rating: 3 ,imagesFromUsers: [] }
   
           this.handleDateChange = this.handleDateChange.bind(this);
           this.changeRating = this.changeRating.bind(this);
       }
 
  
+
+      handleImageChange(e) {
+        e.preventDefault();
+        var imagesFromUsers = [ ]
+        var ins = document.getElementById('image').files.length;
+        for (var x = 0; x < ins; x++) {
+            let reader = new FileReader();
+            let file = e.target.files[x];
+            reader.onloadend = () => {
+            var joined = this.state.imagesFromUsers.concat(reader.result);
+            this.setState({ imagesFromUsers: joined })
+            }
+            reader.readAsDataURL(file)
+        }
+            
+    
+        
+        this.setState({ imagesFromUsers: imagesFromUsers,});
+     
+             let fgff=  imagesFromUsers.map((item,i) =>( 
+                <div className="card-body"> {item.i.imagePreviewUrl}</div>
+                   
+                
+        ))  
+      }
+    
+    
+     
+        uploadHandler  (event)  {
+        event.preventDefault()
+        
+        if (this.state.imagesFromUsers.length<1)
+        {
+          
+            
+            alert('upload at least on photo');return false;
+        }
+    
+        const formData = new FormData()
+        var ins = document.getElementById('image').files.length;
+    for (var x = 0; x < ins; x++) {
+        formData.append("image[]", document.getElementById('image').files[x]);
+       
+    }
+    
+     
+    formData.append("name", this.state.nameData);
+    formData.append("email", this.state.emailData);
+    formData.append("phone", this.state.phoneData);
+    formData.append("category", this.state.categoryData);
+    formData.append("tag", this.state.tagData);
+     
+     
+        axios.post('/uploadPhoto', formData)  .then(function (response) {
+            console.log(response);
+            if (response.data == "done"){
+                $("#step3").addClass( "d-none" );
+                $("#stepicons").addClass( "d-none" );
+                $("#done").removeClass( "d-none" );
+            }
+    
+          })
+          .catch(function (error) {
+             console.log(error);
+          });
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
       changeRating( newRating ) {
         this.setState({
           rating: newRating
@@ -73,9 +153,29 @@ $this.setState({countries:responce.data})}).catch(error=>{  consol.log(error)   
             jQuery('.selectpicker').selectpicker('refresh');
           }, 500);
         $('.selectpicker').selectpicker('refresh');
+
+
+
+        const imageStyle = {
+            width: '100px',
+            marginRight: '20px',
+          };
+   // console.log(this.state.imagesFromUsers);
+        let {imagePreviewUrl} = this.state.imagesFromUsers;
+        let $imagePreview = null;
+ 
+        
+        if (this.state.imagesFromUsers) {
+ 
+        } else {
+          $imagePreview = (<div className="previewText">Please select an Image   Preview</div>);
+        }
+
+
+
         return (
             <div> 
-           // {JSON.stringify(this.state)}
+           
             <div className=" " id="stepicons">
                   
             
@@ -121,11 +221,34 @@ starSpacing='20px'
         {this.state.countries.map((e, key) => {
         return <option key={key} value={e.id}>{e.name}</option>;
         })}</select>
-</div>             
+</div>       
+
+
+<div id="step3" className="">
+<form action="" method="post" encType="multipart/form-data">
+    <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+   
+
+   
+    <input type="file" accept="image/x-png, image/gif, image/jpeg"  onChange={this.handleImageChange.bind(this)} id="image" name="image[]" multiple/>
+ 
+</form> 
+        {this.state.imagesFromUsers.map((item,i) =>( 
+
+ <img style={imageStyle}  src ={ item }  />
+)) }
+</div>
+
+
+
             </div>
 
 
- 
+            <div id="preview"></div>
+            <div className="imgPreview">
+            {$imagePreview}
+            
+            </div>
              </div>
         );
     }

@@ -76627,192 +76627,295 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var AddFilm = function (_Component) {
-  _inherits(AddFilm, _Component);
+    _inherits(AddFilm, _Component);
 
-  function AddFilm() {
-    _classCallCheck(this, AddFilm);
+    function AddFilm() {
+        _classCallCheck(this, AddFilm);
 
-    var _this = _possibleConstructorReturn(this, (AddFilm.__proto__ || Object.getPrototypeOf(AddFilm)).call(this));
+        var _this = _possibleConstructorReturn(this, (AddFilm.__proto__ || Object.getPrototypeOf(AddFilm)).call(this));
 
-    _this.state = { nameV: false, countries: [], getGenres: [], startDate: __WEBPACK_IMPORTED_MODULE_4_moment___default()(), rating: 3 };
+        _this.state = { nameV: false, countries: [], getGenres: [],
+            startDate: __WEBPACK_IMPORTED_MODULE_4_moment___default()(), rating: 3, imagesFromUsers: [] };
 
-    _this.handleDateChange = _this.handleDateChange.bind(_this);
-    _this.changeRating = _this.changeRating.bind(_this);
-    return _this;
-  }
-
-  _createClass(AddFilm, [{
-    key: 'changeRating',
-    value: function changeRating(newRating) {
-      this.setState({
-        rating: newRating
-      });
+        _this.handleDateChange = _this.handleDateChange.bind(_this);
+        _this.changeRating = _this.changeRating.bind(_this);
+        return _this;
     }
-  }, {
-    key: 'handleDateChange',
-    value: function handleDateChange(date) {
-      this.setState({
-        startDate: date
-      });
-    }
-  }, {
-    key: 'handleNameChange',
-    value: function handleNameChange() {}
-  }, {
-    key: 'componentWillMount',
-    value: function componentWillMount() {
 
-      var $this = this;
+    _createClass(AddFilm, [{
+        key: 'handleImageChange',
+        value: function handleImageChange(e) {
+            var _this2 = this;
 
-      axios.get('/AllGenres').then(function (responce) {
-        console.log(responce);
-        $this.setState({ getGenres: responce.data });
-      }).catch(function (error) {
-        consol.log(error);
-      });
+            e.preventDefault();
+            var imagesFromUsers = [];
+            var ins = document.getElementById('image').files.length;
 
-      axios.get('/countries').then(function (responce) {
-        console.log(responce);
-        $this.setState({ countries: responce.data });
-      }).catch(function (error) {
-        consol.log(error);
-      });
-    }
-  }, {
-    key: 'handleChange',
-    value: function handleChange(event) {
-      console.log(event.target.value);
-    }
-  }, {
-    key: 'ConvertToSlug',
-    value: function ConvertToSlug() {
-      //  
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      setTimeout(function () {
-        jQuery('.selectpicker').selectpicker('refresh');
-      }, 500);
-      $('.selectpicker').selectpicker('refresh');
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        '// ',
-        JSON.stringify(this.state),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          { className: ' ', id: 'stepicons' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'form-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { className: 'sr-only', htmlFor: 'name' },
-              'Name'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'name', placeholder: 'Film name...', className: 'f1-first-name form-control', onChange: this.handleNameChange.bind(this), id: 'name' })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'form-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { className: 'sr-only', htmlFor: 'description' },
-              'Description'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { rows: '4', cols: '50', name: 'description', placeholder: '  Description..' })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'form-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { className: 'sr-only', htmlFor: 'description' },
-              'Description'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_datepicker__["a" /* default */], { selected: this.state.startDate, onChange: this.handleDateChange })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'form-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { className: 'sr-only', htmlFor: 'ticket_price' },
-              'ticket_price'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', name: 'ticket_price', placeholder: 'Ticket price...', className: 'f1-first-name form-control', onChange: this.handleNameChange.bind(this), id: 'name' })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'form-group' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { className: 'sr-only', htmlFor: 'ticket_price' },
-              'ticket_price'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_star_ratings___default.a, {
-              rating: this.state.rating,
-              starRatedColor: 'orange',
-              changeRating: this.changeRating,
-              numberOfStars: 5,
-              starDimension: '20px',
-              starSpacing: '20px'
-            })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'form-group row' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { className: 'sr-only', htmlFor: 'Genres' },
-              'Genres'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'select',
-              { className: 'selectpicker', 'data-dropup-auto': 'false', multiple: true, 'data-actions-box': 'true', 'data-live-search': 'true', id: 'Genres' },
-              this.state.getGenres.map(function (e, key) {
+            var _loop = function _loop() {
+                var reader = new FileReader();
+                var file = e.target.files[x];
+                reader.onloadend = function () {
+                    var joined = _this2.state.imagesFromUsers.concat(reader.result);
+                    _this2.setState({ imagesFromUsers: joined });
+                };
+                reader.readAsDataURL(file);
+            };
+
+            for (var x = 0; x < ins; x++) {
+                _loop();
+            }
+
+            this.setState({ imagesFromUsers: imagesFromUsers });
+
+            var fgff = imagesFromUsers.map(function (item, i) {
                 return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'option',
-                  { key: key, value: e.id },
-                  e.title
+                    'div',
+                    { className: 'card-body' },
+                    ' ',
+                    item.i.imagePreviewUrl
                 );
-              })
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'form-group row' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { className: 'sr-only', htmlFor: 'Genres' },
-              'Genres'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'select',
-              { className: 'selectpicker', 'data-dropup-auto': 'false', 'data-actions-box': 'true', 'data-live-search': 'true', id: 'Genres' },
-              this.state.countries.map(function (e, key) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'option',
-                  { key: key, value: e.id },
-                  e.name
-                );
-              })
-            )
-          )
-        )
-      );
-    }
-  }]);
+            });
+        }
+    }, {
+        key: 'uploadHandler',
+        value: function uploadHandler(event) {
+            event.preventDefault();
 
-  return AddFilm;
+            if (this.state.imagesFromUsers.length < 1) {
+
+                alert('upload at least on photo');return false;
+            }
+
+            var formData = new FormData();
+            var ins = document.getElementById('image').files.length;
+            for (var x = 0; x < ins; x++) {
+                formData.append("image[]", document.getElementById('image').files[x]);
+            }
+
+            formData.append("name", this.state.nameData);
+            formData.append("email", this.state.emailData);
+            formData.append("phone", this.state.phoneData);
+            formData.append("category", this.state.categoryData);
+            formData.append("tag", this.state.tagData);
+
+            axios.post('/uploadPhoto', formData).then(function (response) {
+                console.log(response);
+                if (response.data == "done") {
+                    $("#step3").addClass("d-none");
+                    $("#stepicons").addClass("d-none");
+                    $("#done").removeClass("d-none");
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
+        key: 'changeRating',
+        value: function changeRating(newRating) {
+            this.setState({
+                rating: newRating
+            });
+        }
+    }, {
+        key: 'handleDateChange',
+        value: function handleDateChange(date) {
+            this.setState({
+                startDate: date
+            });
+        }
+    }, {
+        key: 'handleNameChange',
+        value: function handleNameChange() {}
+    }, {
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+
+            var $this = this;
+
+            axios.get('/AllGenres').then(function (responce) {
+                console.log(responce);
+                $this.setState({ getGenres: responce.data });
+            }).catch(function (error) {
+                consol.log(error);
+            });
+
+            axios.get('/countries').then(function (responce) {
+                console.log(responce);
+                $this.setState({ countries: responce.data });
+            }).catch(function (error) {
+                consol.log(error);
+            });
+        }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            console.log(event.target.value);
+        }
+    }, {
+        key: 'ConvertToSlug',
+        value: function ConvertToSlug() {
+            //  
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            setTimeout(function () {
+                jQuery('.selectpicker').selectpicker('refresh');
+            }, 500);
+            $('.selectpicker').selectpicker('refresh');
+
+            var imageStyle = {
+                width: '100px',
+                marginRight: '20px'
+            };
+            // console.log(this.state.imagesFromUsers);
+            var imagePreviewUrl = this.state.imagesFromUsers.imagePreviewUrl;
+
+            var $imagePreview = null;
+
+            if (this.state.imagesFromUsers) {} else {
+                $imagePreview = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'previewText' },
+                    'Please select an Image   Preview'
+                );
+            }
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: ' ', id: 'stepicons' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { className: 'sr-only', htmlFor: 'name' },
+                            'Name'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', name: 'name', placeholder: 'Film name...', className: 'f1-first-name form-control', onChange: this.handleNameChange.bind(this), id: 'name' })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { className: 'sr-only', htmlFor: 'description' },
+                            'Description'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { rows: '4', cols: '50', name: 'description', placeholder: '  Description..' })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { className: 'sr-only', htmlFor: 'description' },
+                            'Description'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_datepicker__["a" /* default */], { selected: this.state.startDate, onChange: this.handleDateChange })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { className: 'sr-only', htmlFor: 'ticket_price' },
+                            'ticket_price'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', name: 'ticket_price', placeholder: 'Ticket price...', className: 'f1-first-name form-control', onChange: this.handleNameChange.bind(this), id: 'name' })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { className: 'sr-only', htmlFor: 'ticket_price' },
+                            'ticket_price'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_star_ratings___default.a, {
+                            rating: this.state.rating,
+                            starRatedColor: 'orange',
+                            changeRating: this.changeRating,
+                            numberOfStars: 5,
+                            starDimension: '20px',
+                            starSpacing: '20px'
+                        })
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group row' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { className: 'sr-only', htmlFor: 'Genres' },
+                            'Genres'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            { className: 'selectpicker', 'data-dropup-auto': 'false', multiple: true, 'data-actions-box': 'true', 'data-live-search': 'true', id: 'Genres' },
+                            this.state.getGenres.map(function (e, key) {
+                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'option',
+                                    { key: key, value: e.id },
+                                    e.title
+                                );
+                            })
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'form-group row' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'label',
+                            { className: 'sr-only', htmlFor: 'Genres' },
+                            'Genres'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'select',
+                            { className: 'selectpicker', 'data-dropup-auto': 'false', 'data-actions-box': 'true', 'data-live-search': 'true', id: 'Genres' },
+                            this.state.countries.map(function (e, key) {
+                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                                    'option',
+                                    { key: key, value: e.id },
+                                    e.name
+                                );
+                            })
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { id: 'step3', className: '' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'form',
+                            { action: '', method: 'post', encType: 'multipart/form-data' },
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', name: '_token', id: 'csrf-token', value: '{{ Session::token() }}' }),
+                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'file', accept: 'image/x-png, image/gif, image/jpeg', onChange: this.handleImageChange.bind(this), id: 'image', name: 'image[]', multiple: true })
+                        ),
+                        this.state.imagesFromUsers.map(function (item, i) {
+                            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { style: imageStyle, src: item });
+                        })
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: 'preview' }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'imgPreview' },
+                    $imagePreview
+                )
+            );
+        }
+    }]);
+
+    return AddFilm;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (AddFilm);
 
 
 if (document.getElementById('AddFilm')) {
-  __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(AddFilm, null), document.getElementById('AddFilm'));
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(AddFilm, null), document.getElementById('AddFilm'));
 }
 
 /***/ }),
