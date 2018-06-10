@@ -26,7 +26,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
     .nvla{
-        background-color:#ff0000;
+        background-color:#ffbfdb;
     }
     </style>
 </head>
@@ -81,7 +81,7 @@
             </div>
         </nav>
          
-       <div class="container">  <div id="AddFilm"></div> </div> 
+      
         
         <main class="py-4">
             @yield('content')

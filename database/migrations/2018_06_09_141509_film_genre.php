@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Photos extends Migration
+class FilmGenre extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class Photos extends Migration
      */
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
-       
-            $table->increments('id');
-            $table->integer('film_id');
-            $table->string('data');
+        Schema::create('film_genre', function($table) {
+			$table->increments('id');
+			$table->string('film_id');
+            $table->string('genre_id');
             $table->timestamps();
-
-            });
+		});
     }
 
     /**
@@ -30,7 +28,7 @@ class Photos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photos');
+        Schema::drop('film_genre');
 
     }
 }

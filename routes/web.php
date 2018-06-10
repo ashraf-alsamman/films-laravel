@@ -19,10 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/films', 'HomeController@index')->name('films');
+Route::get('/films', 'FilmController@index')->name('films');
+Route::get('/films/add', 'FilmController@add')->name('films');
 
-Route::get('/films/{slug}', 'HomeController@index')->name('films');
+Route::get('/films/{slug}', 'FilmController@GetFilmBySlug')->name('GetFilmBySlug');
 
 
 Route::get('/AllGenres', 'GenreController@AllGenres')->name('AllGenres');
 Route::get('/countries', 'CountryController@Country')->name('countries');
+Route::post('/SaveFilm', 'FilmController@SaveFilm')->name('SaveFilm');

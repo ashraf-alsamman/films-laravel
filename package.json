@@ -19,8 +19,8 @@
         "lodash": "^4.17.4",
         "popper.js": "^1.12",
         "react": "^16.2.0",
-        "react-dom": "^16.2.0" 
-     },
+        "react-dom": "^16.2.0"
+    },
     "dependencies": {
         "ajv": "^6.5.0",
         "moment": "^2.22.2",
@@ -28,7 +28,7 @@
         "react-datepicker": "^1.5.0",
         "react-select-picker": "0.0.7",
         "react-slug": "^0.1.2",
-        "react-star-ratings": "^2.2.0"
-
+        "react-star-ratings": "^2.2.0",
+        "sweetalert-react": "^0.4.11"
     }
 }
