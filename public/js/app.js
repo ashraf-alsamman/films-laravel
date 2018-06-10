@@ -42512,6 +42512,7 @@ __webpack_require__(232);
 
 __webpack_require__(255);
 __webpack_require__(344);
+__webpack_require__(379);
 
 /***/ }),
 /* 232 */
@@ -104345,6 +104346,130 @@ exports.push([module.i, "body.stop-scrolling {\n  height: 100%;\n  overflow: hid
 
 // exports
 
+
+/***/ }),
+/* 379 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_slug__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_slug___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_slug__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_datepicker__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_datepicker_dist_react_datepicker_css__ = __webpack_require__(354);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_datepicker_dist_react_datepicker_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_datepicker_dist_react_datepicker_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert_dist_sweetalert_css__ = __webpack_require__(377);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_sweetalert_dist_sweetalert_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_sweetalert_dist_sweetalert_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_select_picker__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react_select_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react_select_picker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react_star_ratings__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react_star_ratings___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_react_star_ratings__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_sweetalert_react__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_sweetalert_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_sweetalert_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+
+
+
+
+
+var Comments = function (_Component) {
+    _inherits(Comments, _Component);
+
+    function Comments() {
+        _classCallCheck(this, Comments);
+
+        var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
+
+        _this.state = { commentV: false,
+            comment: null,
+            MyComments: []
+        };
+
+        return _this;
+    }
+
+    _createClass(Comments, [{
+        key: 'handleCommentChange',
+        value: function handleCommentChange(e) {
+            if (e.target.value.length > 0) {
+                document.getElementById("add").style.display = "block";
+            } else {
+                document.getElementById("add").style.display = "none";
+            }
+        }
+    }, {
+        key: 'AddComment',
+        value: function AddComment() {
+            formData.append("comment", this.state.comment);
+
+            if (this.state.nameV && this.state.descriptionV && this.state.TicketPriceV && this.state.CountryIdV) {
+                axios.post('/SaveFilm', formData).then(function (response) {
+                    console.log(response);
+                    if (response.data == "done") {}
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9_sweetalert_react___default.a, {
+                    show: this.state.show,
+                    title: 'error',
+                    text: 'upload at least one image',
+                    onConfirm: function onConfirm() {
+                        return _this2.setState({ show: false });
+                    }
+                }),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('label', { className: 'sr-only', htmlFor: 'description' }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { rows: '2', cols: '80', name: 'description', placeholder: '  add comment..', onChange: this.handleCommentChange.bind(this), id: 'comment' })
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'button',
+                    { id: 'add', style: { display: 'none' }, className: 'btn btn-primary', onClick: this.AddComment.bind(this) },
+                    'Add !'
+                )
+            );
+        }
+    }]);
+
+    return Comments;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Comments);
+
+
+if (document.getElementById('Comments')) {
+    __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Comments, null), document.getElementById('Comments'));
+}
 
 /***/ })
 /******/ ]);

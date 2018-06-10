@@ -15,4 +15,4 @@ require('./bootstrap');
 
 require('./components/Example');
 require('./components/AddFilm');
- 
+require('./components/Comments'); 

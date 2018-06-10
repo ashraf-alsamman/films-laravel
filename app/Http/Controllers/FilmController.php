@@ -23,8 +23,9 @@ class FilmController extends Controller
    
     public function GetFilmBySlug($slug){
       $Film =  Film::where(['film_slug'=>$slug])->first() ;
-      $Photos = $Film->Photos()->get(); 
-      return view('films.FilmBySlug', ['Film' => $Film,'Photos' => $Photos]);  
+      $Photos =       $Film->Photos()->get(); 
+      $Comments = $Film->Comments()->get(); 
+      return view('films.FilmBySlug', ['Film' => $Film,'Photos' => $Photos,'Comments' => $Comments]);  
     
     } 
    

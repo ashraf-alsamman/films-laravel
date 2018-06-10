@@ -10,4 +10,12 @@ class Film extends Model
     {
         return $this->hasMany('App\Photo');
     }
+
+    public function Comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+
+    
 }

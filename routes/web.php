@@ -28,3 +28,5 @@ Route::get('/films/{slug}', 'FilmController@GetFilmBySlug')->name('GetFilmBySlug
 Route::get('/AllGenres', 'GenreController@AllGenres')->name('AllGenres');
 Route::get('/countries', 'CountryController@Country')->name('countries');
 Route::post('/SaveFilm', 'FilmController@SaveFilm')->name('SaveFilm');
+
+Route::post('/Comments', 'FilmController@Comments')->name('Comments');

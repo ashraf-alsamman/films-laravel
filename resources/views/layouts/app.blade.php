@@ -28,6 +28,13 @@
     .nvla{
         background-color:#ffbfdb;
     }
+    .comment{
+ border: dotted 1px #bababa;
+    padding: 20px;
+    min-height: auto !important;
+    padding-right: 0;
+   background:#fff;
+    }
     </style>
 </head>
 <body>
