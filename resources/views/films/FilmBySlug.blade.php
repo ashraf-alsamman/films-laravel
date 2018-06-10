@@ -17,6 +17,7 @@
                     <img class="  profil-img"  width="70" src="{{URL::asset('/uploads/')}}/{{ $photo->data }}" alt="profil">
                    
 @endforeach
+<script>var film_id = {{ $Film->id}};</script>
 <div id="Comments"></div>
 @foreach ($Comments as $comment)
 <div class="comment"> 

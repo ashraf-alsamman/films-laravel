@@ -13,9 +13,11 @@ export default class Comments extends Component {
 
     constructor(){
         super()
-        this.state  = {  commentV: false,
+        this.state  = {  
              comment :null,
              MyComments :[],
+             show :false,
+             film_id :film_id,
             } 
  
   }
@@ -24,6 +26,7 @@ export default class Comments extends Component {
       { 
         if (e.target.value.length>0 )
         {
+            this.setState({ comment: e.target.value }) ; 
             document.getElementById("add").style.display = "block";
         }
     
@@ -35,15 +38,20 @@ export default class Comments extends Component {
 
       AddComment  () 
       {  
+        const formData = new FormData()
         formData.append("comment", this.state.comment);
-  
-    
-    
-    if (this.state.nameV && this.state.descriptionV && this.state.TicketPriceV && this.state.CountryIdV){
-        axios.post('/SaveFilm', formData)  .then(function (response) {
+        formData.append("film_id", this.state.film_id);
+        let $this = this;
+    // if (true){
+        axios.post('/AddComment', formData)  .then(function (response) {
         console.log(response);
-        if (response.data == "done"){  } }).catch(function (error) { console.log(error); });  
-    }
+        if (response.data == "done"){
+            $this.setState({ show: true }) ;
+            
+            var joined = $this.state.MyComments.concat($this.state.comment);
+            $this.setState({ MyComments: joined });
+        } }).catch(function (error) { console.log(error); });  
+    // }
      
 
 }
@@ -59,10 +67,11 @@ export default class Comments extends Component {
  
         return (
             <div> 
+            {JSON.stringify(this.state)}
             <SweetAlert
         show={this.state.show}
-        title="error"
-        text="upload at least one image"
+        title="Done"
+        text="you have enter new comment"
         onConfirm={() => this.setState({ show: false })}
       />
  
@@ -74,6 +83,27 @@ export default class Comments extends Component {
 
       <button id="add" style={{ display: 'none' }} className="btn btn-primary" onClick={this.AddComment.bind(this)}>Add !</button>
 
+
+
+
+      {this.state.MyComments.map((e, key) => {
+        return <div className="NewComment">{e}</div> ;
+        })}
+
+
+      
+      
+         
+
+
+
+
+
+
+
+
+
+      
     </div>
         );
     }

@@ -104399,9 +104399,11 @@ var Comments = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this));
 
-        _this.state = { commentV: false,
+        _this.state = {
             comment: null,
-            MyComments: []
+            MyComments: [],
+            show: false,
+            film_id: film_id
         };
 
         return _this;
@@ -104411,6 +104413,7 @@ var Comments = function (_Component) {
         key: 'handleCommentChange',
         value: function handleCommentChange(e) {
             if (e.target.value.length > 0) {
+                this.setState({ comment: e.target.value });
                 document.getElementById("add").style.display = "block";
             } else {
                 document.getElementById("add").style.display = "none";
@@ -104419,16 +104422,24 @@ var Comments = function (_Component) {
     }, {
         key: 'AddComment',
         value: function AddComment() {
+            var formData = new FormData();
             formData.append("comment", this.state.comment);
+            formData.append("film_id", this.state.film_id);
+            var $this = this;
+            // if (true){
+            axios.post('/AddComment', formData).then(function (response) {
+                console.log(response);
+                if (response.data == "done") {
+                    $this.setState({ show: true });
 
-            if (this.state.nameV && this.state.descriptionV && this.state.TicketPriceV && this.state.CountryIdV) {
-                axios.post('/SaveFilm', formData).then(function (response) {
-                    console.log(response);
-                    if (response.data == "done") {}
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            }
+                    var joined = $this.state.MyComments.concat($this.state.comment);
+                    $this.setState({ MyComments: joined });
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+            // }
+
         }
     }, {
         key: 'render',
@@ -104438,10 +104449,11 @@ var Comments = function (_Component) {
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
+                JSON.stringify(this.state),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9_sweetalert_react___default.a, {
                     show: this.state.show,
-                    title: 'error',
-                    text: 'upload at least one image',
+                    title: 'Done',
+                    text: 'you have enter new comment',
                     onConfirm: function onConfirm() {
                         return _this2.setState({ show: false });
                     }
@@ -104456,7 +104468,14 @@ var Comments = function (_Component) {
                     'button',
                     { id: 'add', style: { display: 'none' }, className: 'btn btn-primary', onClick: this.AddComment.bind(this) },
                     'Add !'
-                )
+                ),
+                this.state.MyComments.map(function (e, key) {
+                    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'NewComment' },
+                        e
+                    );
+                })
             );
         }
     }]);

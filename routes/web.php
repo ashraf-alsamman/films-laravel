@@ -29,4 +29,4 @@ Route::get('/AllGenres', 'GenreController@AllGenres')->name('AllGenres');
 Route::get('/countries', 'CountryController@Country')->name('countries');
 Route::post('/SaveFilm', 'FilmController@SaveFilm')->name('SaveFilm');
 
-Route::post('/Comments', 'FilmController@Comments')->name('Comments');
+Route::post('/AddComment', 'CommentController@AddComment')->name('AddComment');

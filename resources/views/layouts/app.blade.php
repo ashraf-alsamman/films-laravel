@@ -35,6 +35,15 @@
     padding-right: 0;
    background:#fff;
     }
+
+    .NewComment{
+ border: dotted 1px #bababa;
+    padding: 20px;
+    min-height: auto !important;
+    padding-right: 0;
+   background:#c4daff;
+    }
+    
     </style>
 </head>
 <body>
