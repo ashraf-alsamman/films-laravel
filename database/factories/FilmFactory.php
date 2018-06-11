@@ -15,10 +15,12 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Film::class, function (Faker $faker) {
     return [
-'name' => $faker->name,
-'description' => $faker->name,
+'name' => $faker->title,
+'description' => $faker->paragraph,
 'realease_date' => $faker->date,
-
-
+'rating' => $faker->numberBetween($min = 1, $max = 5),
+'ticket_price' => $faker->numberBetween($min = 10, $max = 30),
+'country_id' => $faker->numberBetween($min = 1, $max = 100),
+'film_slug' => $faker->slug,
     ];
 });

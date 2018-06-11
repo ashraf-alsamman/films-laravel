@@ -17,7 +17,7 @@ class Films extends Migration
        
         $table->increments('id');
         $table->string('name');
-        $table->string('description');
+        $table->text('description');
         $table->date('realease_date');
         $table->tinyInteger('rating');
         $table->integer('ticket_price');

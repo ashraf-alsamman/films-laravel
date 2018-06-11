@@ -43,10 +43,37 @@
     padding-right: 0;
    background:#c4daff;
     }
-    
+    .navbar-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+   flex-direction: row; 
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
     </style>
 </head>
 <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Films</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="/films/add">Add +</a></li>
+
+    </ul>
+  </div>
+</nav>
+
+
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
