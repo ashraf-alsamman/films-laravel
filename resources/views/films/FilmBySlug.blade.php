@@ -3,20 +3,28 @@
 @section('content')
 
  <div class="container">  
- <h4> </h4>
+
+ <div id="PhotosByFilm" class="col-xs-8" ></div>
+ <div class="col-xs-4" >
+  <h4> Film Name {{ $Film->name}}</h4>
+  <h5>  description {{ $Film->description}}</h5>
+  <h5> Realease date {{ $Film->realease_date}}</h5>
+  <script>var rating = {{ $Film->rating}};</script>
+<div  id ="Rating"></div>
+  <h5> Ticket price {{ $Film->ticket_price}}</h5>
+
+
+
+
+
+
+
+
+ </div>
  
  <br />
- {{ $Film}}
 
-
-@foreach ($Photos as $photo)
-   
-
-
-                     
-                    <img class="  profil-img"  width="70" src="{{URL::asset('/uploads/')}}/{{ $photo->data }}" alt="profil">
-                   
-@endforeach
+ 
 <script>var film_id = {{ $Film->id}};</script>
 <div id="Comments"></div>
 @foreach ($Comments as $comment)

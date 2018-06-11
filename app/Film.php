@@ -15,6 +15,14 @@ class Film extends Model
     {
         return $this->hasMany('App\Comment');
     }
+    public function Genres()
+    {
+        return $this->belongsToMany('App\Genre', 'film_genre', 'film_id', 'genre_id');
+    }
+
+
+
+
 
 
     

@@ -67,7 +67,7 @@ export default class Comments extends Component {
  
         return (
             <div> 
-            {JSON.stringify(this.state)}
+    
             <SweetAlert
         show={this.state.show}
         title="Done"

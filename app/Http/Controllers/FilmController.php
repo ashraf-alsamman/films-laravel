@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\DB;
 
 class FilmController extends Controller
 {
-
+    public function PhotosByFilm($id){
+        $Film =     Film::find($id) ;
+     return   $Photos =   $Film->Photos()->get(); 
+      }
     public function index(){
         $films = DB::table('films')->paginate(2);
         return View('films.index', ['films' => $films] );
@@ -28,18 +31,22 @@ class FilmController extends Controller
     } 
    
     public function GetFilmBySlug($slug){
-      $Film =  Film::where(['film_slug'=>$slug])->first() ;
-      $Photos =       $Film->Photos()->get(); 
-      $Comments = $Film->Comments()->get(); 
-      return view('films.FilmBySlug', ['Film' => $Film,'Photos' => $Photos,'Comments' => $Comments]);  
+
+       
+
+      $Film =     Film::where(['film_slug'=>$slug])->first() ;
+      $Photos =   $Film->Photos()->get(); 
+      $Comments = $Film->Comments()->get();
+      $Genres =   $Film->Genres()->get();
+      return view('films.FilmBySlug', ['Film' => $Film,'Photos' => $Photos,'Comments' => $Comments,'Genres' => $Genres]);  
     
     } 
    
    
     public function createSlug($str, $delimiter = '-'){
-
+ 
         $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
-        return $slug;
+        return $slug.'-'.mt_rand(100000, 999999);;
     
     } 
 

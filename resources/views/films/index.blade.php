@@ -7,7 +7,7 @@
  <div class="container">
     @foreach ($films as $film)
        
-<a href="films/{{ $film->film_slug }}">{{ $film->name }}</a>
+<a href="/films/{{ $film->film_slug }}">{{ $film->name }}</a>
 <br>
 
     @endforeach

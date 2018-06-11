@@ -15,4 +15,6 @@ require('./bootstrap');
 
 require('./components/Example');
 require('./components/AddFilm');
-require('./components/Comments'); 
+require('./components/Comments');
+ require('./components/PhotosByFilm'); 
+  require('./components/Rating'); 

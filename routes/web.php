@@ -11,13 +11,16 @@
 |
 */
 
+ 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/films');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('/films', 'FilmController@index')->name('films');
 Route::get('/films/add', 'FilmController@add')->name('films');
@@ -30,3 +33,5 @@ Route::get('/countries', 'CountryController@Country')->name('countries');
 Route::post('/SaveFilm', 'FilmController@SaveFilm')->name('SaveFilm');
 
 Route::post('/AddComment', 'CommentController@AddComment')->name('AddComment');
+
+Route::get('/PhotosByFilm/{id}', 'FilmController@PhotosByFilm')->name('PhotosByFilm');
