@@ -12,10 +12,16 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\AjaxImage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 
 class FilmController extends Controller
 {
+
+    public function index(){
+        $films = DB::table('films')->paginate(2);
+        return View('films.index', ['films' => $films] );
+      }
 
     public function add(){
       return View('films.add' );
