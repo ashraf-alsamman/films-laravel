@@ -19,7 +19,7 @@ class FilmController extends Controller
 {
     public function PhotosByFilm($id){
         $Film =     Film::find($id) ;
-     return   $Photos =   $Film->Photos()->get(); 
+        return   $Photos =   $Film->Photos()->get(); 
       }
     public function index(){
         $films = DB::table('films')->paginate(2);
@@ -31,36 +31,26 @@ class FilmController extends Controller
     } 
    
     public function GetFilmBySlug($slug){
-
-       
-
       $Film =     Film::where(['film_slug'=>$slug])->first() ;
       $Photos =   $Film->Photos()->get(); 
       $Comments = $Film->Comments()->get();
       $Genres =   $Film->Genres()->get();
       return view('films.FilmBySlug', ['Film' => $Film,'Photos' => $Photos,'Comments' => $Comments,'Genres' => $Genres]);  
-    
     } 
    
    
     public function createSlug($str, $delimiter = '-'){
- 
         $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
         return $slug.'-'.mt_rand(100000, 999999);;
-    
     } 
 
     public function SaveFilm(Request $request)
     {
-        // return $request->all();
-     /*
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required',
-            'phone' => 'required',
-            'category' => 'required',
+            'description' => 'required',
         ]);
-*/
+ 
         $Film = new Film();
         $Film->name = $request->name ;
         $Film->description = $request->description ;
@@ -70,16 +60,12 @@ class FilmController extends Controller
         $Film->country_id = $request->country_id ;
         $Film->film_slug = $this->createSlug ($request->name); 
 
-    //  $Film->user_id = 1; 
-        // $Film->save();
-
- 
         if($Film->save()) 
         {
            
-                  // start save genres
-       $qqq = $request->genres;
-       $genres = explode(",",$qqq);
+            // start save genres
+        $qqq = $request->genres;
+        $genres = explode(",",$qqq);
   
        
        foreach($genres as $genre):
@@ -90,7 +76,7 @@ class FilmController extends Controller
         $FilmGenre->save();
         endforeach;
       
-        $index = 0;
+            $index = 0;
 
             // upload start
             $image = $request->file('image');
@@ -99,7 +85,7 @@ class FilmController extends Controller
             // $imageName =  $index.time().'.'.$singleFile->getClientOriginalExtension();
             // Storage::put($imageName,file_get_contents($singleFile));
             $imageName = $singleFile->hashName();
-             $singleFile->move(public_path('/uploads'),$imageName ); 
+            $singleFile->move(public_path('/uploads'),$imageName ); 
 
             $Photo = new Photo();
             $Photo->data = $imageName;
@@ -108,7 +94,7 @@ class FilmController extends Controller
 
             endforeach;
             // upload end
- return $Film->film_slug;
+            return $Film->film_slug;
 
 
 

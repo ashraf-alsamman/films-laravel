@@ -12,6 +12,8 @@ import SweetAlert from 'sweetalert-react';
 export default class AddFilm extends Component {
 
     constructor(){
+       
+
         super()
         this.state  = { 
             nameV: false, 
@@ -97,12 +99,12 @@ export default class AddFilm extends Component {
     formData.append("country_id", this.state.CountryIdData); 
     formData.append("film_slug", this.state.film_slugData); 
     formData.append("genres", this.state.GenresData); 
-
+    
 
 if (this.state.nameV && this.state.descriptionV && this.state.TicketPriceV && this.state.CountryIdV){
     axios.post('/SaveFilm', formData)  .then(function (response) {
     console.log(response);
-    if (response.data == "done"){  } }).catch(function (error) { console.log(error); });  
+    if (response.data != "error"){window.location.replace('/films/'+response.data);} }).catch(function (error) { console.log(error); });  
 }
 
  

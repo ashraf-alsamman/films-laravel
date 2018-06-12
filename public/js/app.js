@@ -93127,7 +93127,9 @@ var AddFilm = function (_Component) {
             if (this.state.nameV && this.state.descriptionV && this.state.TicketPriceV && this.state.CountryIdV) {
                 axios.post('/SaveFilm', formData).then(function (response) {
                     console.log(response);
-                    if (response.data == "done") {}
+                    if (response.data != "error") {
+                        window.location.replace('/films/' + response.data);
+                    }
                 }).catch(function (error) {
                     console.log(error);
                 });
